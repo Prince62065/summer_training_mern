@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="bg-white rounded-xl w-120 px-5 py-5 h-80 shadow-xl shadow-gray-400">
+    <h1 class="text-2xl font-bold text-center text-blue-500 mt-4 mb-5">Start Game</h1>
+    <form action="#" id="form_input"  class="p-2 mt-2 space-y-2">
+        <div class="">
+            <label for="num" class=" ">Enter the number between 1 to 100</label>
+            
+        </div>
+        <input type="number" name="number" placeholder="Enter the number" id="user_num" required class="rounded-md bg-gray-200 px-5 py-3 w-full ">
+        <input type="submit" value="Submit" class="bg-blue-700 text-white px-5 py-2 rounded-md ">
+    </form>
+    <div class="px-2 text-red-800">
+        <p id="count"></p>
+    </div>
+    
+    </div>
+    <script>
+        let form=document.getElementById('form_input');
+        let num=Math.ceil(Math.random()*100);
+        let msg=document.getElementById('count');
+        let maxAttempt=5;
+        let attempt=0;
+        form.addEventListener('submit',function(e){
+            e.preventDefault();
+            attempt++;
+             let guessInput = document.getElementById('user_num');
+            let guess = parseInt(guessInput.value);
+            if(guess<0 || guess>100){
+                attempt--;
+                alert("Input is input. Please enter the number between 1 to 100.");
+            }
+            else if(guess===num){
+                alert(`You have sucessfully guess the correct number in ${attempt} attempts`);
+                msg.textContent=`* You have successfully guess the number in ${maxAttempt-attempt} attempts and number is ${num}`;
+                return;
+            }
+            else if(guess<num){
+                msg.textContent=`* ${maxAttempt-attempt} attempts are remaining.`;
+                alert("Number must be greater ");
+            }
+            else if(guess>num){
+                msg.textContent=`* ${maxAttempt-attempt} attempts are remaining.`;
+                alert("Number must be smaller");
+            }
+            if(attempt>=maxAttempt){
+                msg.textContent=`* You have excced your limit to guess the number. The number is ${num}`;
+                return;
+            }
+
+            guessInput.value = '';
+        })
+    </script>
+</body>
+</html>
