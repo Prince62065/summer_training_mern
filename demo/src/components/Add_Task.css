@@ -1,0 +1,33 @@
+.add_task {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 700px;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  margin: 100px auto;
+  border-radius: 5px;
+  box-shadow: 5px 8px 10px 0.5px gray;
+
+}
+
+button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: blue;
+  color: white;
+  border: none; 
+  cursor: pointer;
+  margin: 12px ;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: darkblue;
+}
+
+p{
+  font-size: 18px ;
+}
