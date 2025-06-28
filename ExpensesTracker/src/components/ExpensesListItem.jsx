@@ -7,7 +7,7 @@ export const ExpensesListItems = ({ expense, index, onDelete }) => {
         {new Date(expense.date).toLocaleDateString()}
       </td>
       <td className="border border-gray-300 px-4 py-2">
-        <button className="bg-red-700 text-white px-4 py-1 rounded-lg" onClick={()=>{onDelete(index);}}>
+        <button className="bg-red-700 text-white px-4 py-1 cursor-pointer hover:bg-red-800 rounded-lg" onClick={()=>{onDelete(index);}}>
           Delete
         </button>
       </td>
