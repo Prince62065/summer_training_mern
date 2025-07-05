@@ -68,8 +68,8 @@ export default function Home() {
                 </div>
               </>
             ) : (
-              <div className="mt-5">
-                <p className="text-center text-4xl uppercase">{error}</p>
+              <div className="mt-5 px-5 ">
+                <p className="text-center text-4xl uppercase break-words">{error}</p>
               </div>
             )}
           </div>
