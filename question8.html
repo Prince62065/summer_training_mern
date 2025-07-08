@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="myInput" placeholder="Enter text">
+    <button onclick="updateText()">Show Text</button>
+    <p id="output"></p>
+
+    <script>
+        function updateText() {
+            var input = document.getElementById('myInput').value;
+            document.getElementById('output').textContent = input;
+        }
+    </script>
+</body>
+</html>

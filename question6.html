@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Calculate sum of two numbers.</h1>
+    <p class="sumResult"></p>
+    <script>
+        let x=parseFloat(prompt("Enter the value of first number"));
+        let y=parseFloat(prompt("Enter the value of second number"));
+        console.log(typeof x);
+        const sum=(x,y)=>{
+            return x+y;
+        }
+        let sums = sum(x, y);
+        alert("Sum of two number is " + sums);
+        document.getElementsByClassName('sumResult')[0].innerHTML = "Sum of two number is " + sums;
+    </script>
+</body>
+</html>

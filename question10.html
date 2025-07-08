@@ -1,0 +1,41 @@
+<!-- Create a list (ul) and add a button that removes the adds an item to the list when it is clicked using DOM methods. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="myList">
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+    <button id="addBtn">Add Item</button>
+    <button id="removeBtn">Remove Last Item</button>
+
+    <script>
+        const ul = document.getElementById('myList');
+        const addBtn = document.getElementById('addBtn');
+        const removeBtn = document.getElementById('removeBtn');
+        let count = 3;
+
+        addBtn.onclick = function() {
+            const li = document.createElement('li');
+            li.textContent = 'Item ' + count++;
+            ul.appendChild(li);
+        };
+
+        removeBtn.onclick = function() {
+            if (ul.lastElementChild) {
+                ul.removeChild(ul.lastElementChild);
+                count = count--;
+            }
+            else{
+                alert('No items is avaliable in the list');
+            }
+        };
+    </script>
+</body>
+</html>
