@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive DOM Example</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: rgb(203, 199, 199);
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      #container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 600px;
+        margin: auto;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 600px) {
+        #container {
+          padding: 15px;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        p {
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Card</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In sed assumenda nam quos dolorum eius delectus tempora eveniet, minima harum totam nemo aspernatur quidem. Distinctio?</p>
+    </div>
+  </body>
+</html>

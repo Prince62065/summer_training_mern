@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessible & Responsive Page</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #cac8c8;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      .card {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 600px;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+      .profile-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto 10px;
+      }
+
+      form {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      input,
+      button {
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Media query for resposive layout */
+      @media (max-width: 600px) {
+        .card {
+          padding: 15px;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        input,
+        button {
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Welcome to My Page</h1>
+      <img
+        src="./pics_linkedin.jpg"
+        alt="Example of linkedin profile pics"
+        class="profile-img"
+      />
+      <p>
+        This is a simple responsive and accessible card with an image and form.
+      </p>
+
+      <!-- add the arial-label in the form -->
+      <form aria-label="Contact form">
+        <input type="text" placeholder="Your Name" aria-label="Name" required />
+        <input
+          type="email"
+          placeholder="Your Email"
+          aria-label="Email"
+          required
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

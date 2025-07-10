@@ -1,0 +1,25 @@
+<!-- // ⁠Use parentNode, childNodes, or nextSibling to log different parts of the DOM. -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Javascript Node</h1>
+      <p>Lorem ipsum dolor sit amet.</p>
+    </div>
+    <div>
+        <h1>Next Sibling</h1>
+    </div>
+    <script>
+      const element = document.getElementById("container");
+      console.log("Parent Node:", element.parentNode);
+      console.log("Child Nodes:", element.childNodes);
+      console.log("Next Sibling:", element.nextSibling);
+      console.log("Next Element Sibling:", element.nextElementSibling);
+    </script>
+  </body>
+</html>
