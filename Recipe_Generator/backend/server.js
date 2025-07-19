@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/user.routes');
 const authRoutes = require('./routes/auth.routes');
 const cors = require("cors");
+const recipeRoutes = require('./routes/recipe.routes');
+const groceryRoutes = require('./routes/grocery.routes');
 
 require('dotenv').config();
 
@@ -20,6 +22,9 @@ app.use(cors());
 app.use(express.json())
   .use('/auth', authRoutes)
   .use('/user',  userRoutes);
+
+app.use('/recipes', recipeRoutes);
+app.use('/grocery', groceryRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log("Server is running");

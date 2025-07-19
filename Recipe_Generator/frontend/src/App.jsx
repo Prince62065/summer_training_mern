@@ -11,29 +11,27 @@ import SignUp from "./pages/SignUp";
 import Protected from "./components/Protected";
 
 function App() {
-  const [savedRecipes, setSavedRecipes] = useState(() => {
-    // Load from localStorage initially
-    const stored = localStorage.getItem("savedRecipes");
-    return stored ? JSON.parse(stored) : [];
-  });
+ const [savedRecipes, setSavedRecipes] = useState([]);
 
-  const saveRecipes = (recipe, ingredients) => {
-    const newSave = {
-      ...recipe,
-      ingredients,
-    };
 
-    const updatedRecipes = [...savedRecipes, newSave];
-    setSavedRecipes(updatedRecipes);
+  const saveRecipes = async (recipe, ingredients) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await axios.post(
+        "http://localhost:3002/api/recipes/save",
+        { ...recipe, ingredients },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    // Save to localStorage
-    localStorage.setItem("savedRecipes", JSON.stringify(updatedRecipes));
+      setSavedRecipes((prev) => [...prev, res.data]); // Add newly saved recipe from backend response
+    } catch (err) {
+      console.error("Failed to save recipe", err);
+    }
   };
-
-  useEffect(() => {
-    // Sync localStorage if savedRecipes changes
-    localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
-  }, [savedRecipes]);
 
  
 

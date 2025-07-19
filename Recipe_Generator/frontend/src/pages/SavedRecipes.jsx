@@ -1,5 +1,21 @@
+import { useState } from "react";
+import { FaStar } from "react-icons/fa";
+
 export default function SavedRecipes({ savedRecipes }) {
-    
+    const [ratings, setRatings] = useState(
+        savedRecipes.reduce((acc, recipe, index) => {
+            acc[index] = recipe.rating || 0; 
+            return acc;
+        }, {})
+    );
+
+    const handleRating = (index, newRating) => {
+        setRatings((prev) => ({ ...prev, [index]: newRating }));
+
+        // Optional: If you want to send the rating to backend, call API here.
+        // Example:
+        // axios.post('/api/recipes/rate', { id: recipe._id, rating: newRating })
+    };
 
     return (
         <div
@@ -22,7 +38,7 @@ export default function SavedRecipes({ savedRecipes }) {
                         {savedRecipes.map((recipe, index) => (
                             <div
                                 key={index}
-                                className="bg-white dark:bg-gray-800 rounded-lg shadow-lg  flex flex-col transition transform hover:scale-105 duration-300"
+                                className="bg-white dark:bg-gray-800 rounded-lg shadow-lg flex flex-col transition transform hover:scale-105 duration-300"
                             >
                                 <img
                                     src={recipe.image}
@@ -33,10 +49,29 @@ export default function SavedRecipes({ savedRecipes }) {
                                     <h3 className="text-lg font-semibold uppercase text-gray-800 dark:text-gray-100 mb-2">
                                         {recipe.title}
                                     </h3>
-                                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                                        <strong>Ingredients:</strong>{" "}
-                                        {recipe.ingredients.join(", ")}
+                                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                                        <strong>Ingredients:</strong> {recipe.ingredients.join(", ")}
                                     </p>
+
+                                    <div className="flex items-center gap-1">
+                                        {Array(5)
+                                            .fill(0)
+                                            .map((_, starIndex) => (
+                                                <FaStar
+                                                    key={starIndex}
+                                                    size={20}
+                                                    onClick={() => handleRating(index, starIndex + 1)}
+                                                    className={`cursor-pointer transition-colors ${
+                                                        starIndex < ratings[index]
+                                                            ? "text-yellow-400"
+                                                            : "text-gray-400 dark:text-gray-500"
+                                                    }`}
+                                                />
+                                            ))}
+                                        <span className="ml-2 text-gray-600 dark:text-gray-300">
+                                            {ratings[index]} / 5
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         ))}
