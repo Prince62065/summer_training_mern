@@ -23,8 +23,8 @@ export default function RecipeSearch({ queryList, onSave }) {
       )}
 
       {!loading && !error && recipes.length === 0 && (
-        <p className="text-2xl text-center text-gray-800 dark:text-gray-300 font-semibold">
-          No Recipes Found for the given ingredients.
+        <p className="text-2xl text-center text-slate-500 dark:text-gray-300 font-semibold">
+          No Recipes Found .
         </p>
       )}
 

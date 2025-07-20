@@ -1,20 +1,36 @@
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
+import axios from "axios";
 
 export default function SavedRecipes({ savedRecipes }) {
     const [ratings, setRatings] = useState(
         savedRecipes.reduce((acc, recipe, index) => {
-            acc[index] = recipe.rating || 0; 
+            acc[recipe._id] = recipe.rating || 0; // Use _id for keys
             return acc;
         }, {})
     );
 
-    const handleRating = (index, newRating) => {
-        setRatings((prev) => ({ ...prev, [index]: newRating }));
+    const handleRating = async (recipeId, newRating) => {
+        setRatings((prev) => ({ ...prev, [recipeId]: newRating }));
 
-        // Optional: If you want to send the rating to backend, call API here.
-        // Example:
-        // axios.post('/api/recipes/rate', { id: recipe._id, rating: newRating })
+        try {
+            const token = localStorage.getItem("token");
+
+            await axios.post(
+                "http://localhost:3002/recipes/rate",
+                { recipeId, rating: newRating },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            console.log(`Recipe ${recipeId} rated successfully`);
+        } catch (err) {
+            console.error("Failed to rate recipe", err);
+            alert("Rating failed. Try again.");
+        }
     };
 
     return (
@@ -35,9 +51,9 @@ export default function SavedRecipes({ savedRecipes }) {
                     </p>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                        {savedRecipes.map((recipe, index) => (
+                        {savedRecipes.map((recipe) => (
                             <div
-                                key={index}
+                                key={recipe._id}
                                 className="bg-white dark:bg-gray-800 rounded-lg shadow-lg flex flex-col transition transform hover:scale-105 duration-300"
                             >
                                 <img
@@ -60,16 +76,16 @@ export default function SavedRecipes({ savedRecipes }) {
                                                 <FaStar
                                                     key={starIndex}
                                                     size={20}
-                                                    onClick={() => handleRating(index, starIndex + 1)}
+                                                    onClick={() => handleRating(recipe._id, starIndex + 1)}
                                                     className={`cursor-pointer transition-colors ${
-                                                        starIndex < ratings[index]
+                                                        starIndex < ratings[recipe._id]
                                                             ? "text-yellow-400"
                                                             : "text-gray-400 dark:text-gray-500"
                                                     }`}
                                                 />
                                             ))}
                                         <span className="ml-2 text-gray-600 dark:text-gray-300">
-                                            {ratings[index]} / 5
+                                            {ratings[recipe._id]} / 5
                                         </span>
                                     </div>
                                 </div>

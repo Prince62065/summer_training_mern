@@ -20,7 +20,7 @@ export default function AddButton({ addQuery }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Send the full list to parent
+       
         addQuery(inputs);
     };
 

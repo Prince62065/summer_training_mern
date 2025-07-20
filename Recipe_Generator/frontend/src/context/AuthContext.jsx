@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
                 const now = Date.now() / 1000;
 
                 if (decoded.exp && decoded.exp < now) {
-                    // Token expired
+                    
                     localStorage.removeItem("token");
                 } else {
                     setUser({ username: decoded.username });

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const API_KEY = ""; 
+const API_KEY = "b756d5f24c85447cb19d23fec8570592"; 
 
 export function useRecipeSuggest(query) {
     const [recipes, setRecipes] = useState([]);

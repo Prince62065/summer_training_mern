@@ -7,7 +7,7 @@ exports.saveRecipe = async (req, res) => {
 
     try {
         const newRecipe = new Recipe({
-            user: req.user.id,
+            user: req.userId,   
             title,
             image,
             ingredients
@@ -17,6 +17,7 @@ exports.saveRecipe = async (req, res) => {
 
         res.status(201).json({ message: 'Recipe saved successfully', recipe: newRecipe });
     } catch (err) {
+        console.error(err);
         res.status(500).json({ error: 'Failed to save recipe' });
     }
 };
@@ -24,7 +25,7 @@ exports.saveRecipe = async (req, res) => {
 // Get Saved Recipes
 exports.getRecipes = async (req, res) => {
     try {
-        const recipes = await Recipe.find({ user: req.user.id });
+        const recipes = await Recipe.find({ user: req.userId });  
         res.json(recipes);
     } catch (err) {
         res.status(500).json({ error: 'Failed to fetch recipes' });
@@ -54,16 +55,12 @@ exports.rateRecipe = async (req, res) => {
 // Generate Grocery List
 exports.generateGroceryList = async (req, res) => {
     try {
-        const recipes = await Recipe.find({ user: req.user.id });
-
-        // Flatten all ingredients
+        const recipes = await Recipe.find({ user: req.userId });  
         const allIngredients = recipes.flatMap(recipe => recipe.ingredients);
-
-        // Remove duplicates
         const uniqueIngredients = [...new Set(allIngredients)];
 
         const grocery = new Grocery({
-            user: req.user.id,
+            user: req.userId,    
             items: uniqueIngredients
         });
 

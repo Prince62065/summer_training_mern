@@ -7,8 +7,12 @@ exports.createUser = async (req, res) => {
     return res.status(201).json({ message: 'User created', newUser });
   } catch (error) {
     if (error instanceof BadRequestError) {
-      return res.status(400).json(error.message);
+      return res.status(400).json({ error: error.message });
     }
+
+    
+    console.error(error);
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 

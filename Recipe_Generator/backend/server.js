@@ -23,6 +23,14 @@ app.use(express.json())
   .use('/auth', authRoutes)
   .use('/user',  userRoutes);
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+
+  res.status(err.status || 500).json({
+    error: err.message || 'Internal Server Error'
+  });
+});
+
 app.use('/recipes', recipeRoutes);
 app.use('/grocery', groceryRoutes);
 
